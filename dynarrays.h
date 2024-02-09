@@ -3,7 +3,8 @@
 
 #include <sys/_types/_size_t.h>
 
-#define dynarray(T, a) (T*)dynarray_init(sizeof(T), a)
+#define dynarray(T, a) dynarray_init(sizeof(T), a)
+#define GET_ARRAY_ELEM(T,at) *((char*)T->data + (T->size_of_data_value * at))
 
 typedef struct dynarray_struct {
   void *data;
@@ -14,6 +15,7 @@ typedef struct dynarray_struct {
 
 extern dynarray dynarray_init(size_t, size_t);
 extern void dynarray_append(void *item, dynarray *array);
+extern void dynarray_pop(dynarray *array);
 extern void copy_array(char* src, char* dst, size_t src_length, size_t size_of_data_value);
 extern void free_dynarray(dynarray *array);
 

@@ -29,6 +29,15 @@ void dynarray_append(void *item, dynarray *array) {
   array->length++;
 }
 
+
+void dynarray_pop(dynarray *array) {
+  char* data_value = array->data + array->length * array->size_of_data_value;
+  for (size_t i = 0; i < array->size_of_data_value; i++) {
+    *data_value = 0;
+  }
+  array->length = array->length-1;
+}
+
 void free_dynarray(dynarray *array) {
   if (array->data != NULL) {
     free(array->data);
@@ -41,5 +50,6 @@ void copy_array(char *src,char *dst, size_t src_length, size_t size_of_data_valu
     dst[i] = src[i];
   }
 }
+
 
 
