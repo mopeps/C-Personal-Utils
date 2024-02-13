@@ -7,7 +7,8 @@ dynarray dynarray_init(size_t data_size, size_t capacity) {
   if (capacity == 0) {
 	capacity++;
   }
-  void *data = malloc((capacity * data_size));
+
+  void *data = calloc(capacity ,data_size);
   dynarray init = { data, capacity, 0, data_size};
   return init;
 }
@@ -15,10 +16,7 @@ dynarray dynarray_init(size_t data_size, size_t capacity) {
 void dynarray_append(void *item, dynarray *array) {
   if (array->length == array->capacity) {
     size_t new_capacity = array->capacity << 1;
-    void* new_data = malloc(new_capacity * array->size_of_data_value);
-    copy_array((char*)array->data,(char*) new_data, array->length, array->size_of_data_value);
-    free(array->data);
-    array->data = new_data;
+    array->data = realloc(array->data,new_capacity * array->size_of_data_value);
     array->capacity = new_capacity;
   }
 

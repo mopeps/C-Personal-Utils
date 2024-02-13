@@ -29,7 +29,7 @@ void test_pop(dynarray *T) {
 
 int main() {
   int pepe = 2;
-  dynarray T = dynarray_init(sizeof(int), 0);
+  dynarray T = dynarray(int, 0);
   test_add(&T, &pepe);
   test_add(&T, &pepe);
   test_add(&T, &pepe);
